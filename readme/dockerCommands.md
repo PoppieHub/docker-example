@@ -16,12 +16,12 @@
 
 * Запуск образа:
 
-```bash
-# daemon режим
-docker run ubuntu -d
-# интерактивный режим (запускаем bash)
-docker run -it ubuntu bash
-```
+   ```bash
+   # daemon режим
+   docker run ubuntu -d
+   # интерактивный режим (запускаем bash)
+   docker run -it ubuntu bash
+   ```
 
 * Cписок образов, которые нам доступны в локальном репозитории 
    ```bash
