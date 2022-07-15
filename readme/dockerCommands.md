@@ -12,9 +12,9 @@
     * Чтобы остановить контейнеры, используйте команду - ```docker-compose down```.
     * Чтобы перезапустить контейнеры, используйте команду - ```docker-compose restart```.
 
-### Основные команды Docker
+### Основные команды Docker:
 
-#### Запуск образа
+* Запуск образа:
 
 ```bash
 # daemon режим
@@ -23,72 +23,99 @@ docker run ubuntu -d
 docker run -it ubuntu bash
 ```
 
-#### Список контейнеров
-##### Запущенные
+* Cписок образов, которые нам доступны в локальном репозитории 
+   ```bash
+   docker images
+   ```
 
-```bash
-docker ps
-```
-##### Все
+* Список контейнеров
+   * Запущенные:
+   
+      ```bash
+      docker ps
+      ```
+   * Все:
+   
+      ```bash
+      docker ps -a
+      # Получить список id контейнеров
+      docker ps -aq
+      ```
 
-```bash
-docker ps -a
-# Получить список id контейнеров
-docker ps -aq
-```
+* Запуск, остановка контейнера:
 
-#### Запуск, остановка контейнера
+   ```bash
+   docker start containername
+   docker stop containername
+   ```
+* Получение информация о контейнере
+   * Общая информация:
+   
+      ```bash
+      docker inspect containername
+      ```
 
-```bash
-docker start containername
-docker stop containername
-```
-#### Получение информация о контейнере
+   * Дифы от начального состояния:
+   
+      ```bash
+      docker diff containername
+      ```
+   * Лог контейнера:
+   
+      ```bash
+      docker logs containername
+      ```
 
-##### Общая информация
+* Удаление контейнеров:
 
-```bash
-docker inspect containername
-```
+   ```bash
+   docker rm -v $(docker ps -aq) # Все
+   docker rm -v $(docker ps -q) # Все активные
+   docker rm -v $(docker ps -aq -f status=exited) # Все неактивные
+   ```
 
-##### Дифы от начального состояния
+* Удаляем "висячие образы":
 
-```bash
-docker diff containername
-```
-
-##### Лог контейнера
-
-```bash
-docker logs containername
-```
-
-#### Удаление контейнеров
-
-```bash
-docker rm -v $(docker ps -aq) # Все
-docker rm -v $(docker ps -q) # Все активные
-docker rm -v $(docker ps -aq -f status=exited) # Все неактивные
-```
-
-#### Удаляем "висячие образы"
-```
-docker rmi $(docker images -f "dangling=true" -q)
-```
-
-
+   ```
+   docker rmi $(docker images -f "dangling=true" -q)
+   ```
+* Удалить любой из образов по id:
+   
+   ```
+   docker rmi container_name
+   ```
+* Зайти в контейнер с хостовой машины:
+   
+   ```
+   docker exec -ti container_name /bin/bash
+   ```
+* Провести очистку системы: 
+   
+   ```
+   docker system prune
+   ```
+   
 ### Основные команды Docker-Compose
 
-#### Создаем контейнер
-```
-docker-compose up -d
-```
+* Создаем контейнер:
 
-#### Остановка и удаление контейнеров
-```
-docker-compose down
-```
+   ```
+   docker-compose up -d
+   ```
 
-#### Выполняем команду в контейнере
-```
-docker exec -it container_name bash
+* Остановка и удаление контейнеров:
+
+   ```
+   docker-compose down
+   ```
+* Перезапуск контейнеров: 
+
+   ```
+   docker-compose restart
+   ```   
+
+* Выполняем команду в контейнере:
+
+   ```
+   docker exec -it container_name bash
+   ```
