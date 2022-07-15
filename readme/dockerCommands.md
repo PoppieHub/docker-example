@@ -95,7 +95,7 @@
    docker system prune
    ```
    
-### Основные команды Docker-Compose
+### Основные команды Docker-Compose:
 
 * Создаем контейнер:
 
